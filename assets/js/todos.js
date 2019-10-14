@@ -1,6 +1,26 @@
-// Check off specific todos by clicking
 
-$("li").click(function() {
-  $(this).css("color", "red");
-  $(this).css("text-decoration", "line-through");
+
+// !Using the TOGGLE CLASS:
+
+$("ul").on("click", "li", function() {
+  $(this).toggleClass("completed");
+});
+
+// !click on X to delete Todo:
+$("ul").on("click", "span", function(){
+    $(this).parent().fadeOut(1000, function() {
+        $(this).remove();
+    });
+    event.stopPropagation();
+});
+
+//! input button, insert text when hit enter:
+$("input[type='text']").keypress(function(event){
+    if(event.which === 13){
+    //grabbing new todo text from input
+    var todoText = $(this).val();
+    $(this).val("");
+    //create a new li and add to ul
+    $("ul").append("<li><span>X</span> " + todoText + "</li>")
+    }
 });
